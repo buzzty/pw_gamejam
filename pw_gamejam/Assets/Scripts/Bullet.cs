@@ -7,7 +7,6 @@ public class Bullet : MonoBehaviour {
 	public float speed = 20f;
 	public int damage = 40;
 	public Rigidbody2D rb;
-	public GameObject impactEffect;
 
 	// Use this for initialization
 	void Start () {
@@ -21,8 +20,6 @@ public class Bullet : MonoBehaviour {
 		{
 			enemy.TakeDamage(damage);
 		}
-
-		Instantiate(impactEffect, transform.position, transform.rotation);
 
 		Destroy(gameObject);
 	}
