@@ -2,15 +2,18 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerMovement : MonoBehaviour {
+public class PlayerMovement : MonoBehaviour 
+{
 
     public CharacterController2D controller;
     public Animator animator;
+    public Rigidbody2D rb;
 
     public float runSpeed = 40f;
 
     float horizontalMove = 0f;
     bool jump = false;
+    private bool airBorn = false;
 
     // Update is called once per frame
     void Update () 
@@ -25,11 +28,21 @@ public class PlayerMovement : MonoBehaviour {
             jump = true;
             animator.SetBool("IsJumping", true);
         }
+        
+        if (Input.GetKeyDown(KeyCode.LeftShift))
+        {
+            rb.gravityScale = 1;
+        }
+        if (Input.GetKeyUp(KeyCode.LeftShift))
+        {
+            rb.gravityScale = 3;
+        }
     }
 
     public void OnLanding ()
     {
         animator.SetBool("IsJumping", false);
+        rb.gravityScale = 3;
     }
 
     void FixedUpdate ()
